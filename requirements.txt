@@ -1,8 +1,8 @@
-﻿@
+﻿
 Flask==3.0.0
 pymongo==4.6.0
 Flask-PyMongo==2.3.0
 fpdf==1.7.2
-@
+
 
 gunicorn==21.2.0
