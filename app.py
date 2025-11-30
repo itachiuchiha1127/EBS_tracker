@@ -1,3 +1,4 @@
+﻿@
 import os
 import json
 import datetime
@@ -8,6 +9,7 @@ from file_handler import log_error, generate_csv, generate_pdf, backup_data
 
 app = Flask(__name__)
 app.secret_key = "super_secret_key_for_dev"
+# Use Environment Variable for Cloud, fallback to local
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI", "mongodb://localhost:27017/finance_tracker")
 
 init_db(app)
@@ -27,6 +29,9 @@ def inject_config():
 def dashboard():
     try:
         db = get_db()
+        if db is None:
+            raise Exception("Database not connected. Check MONGO_URI.")
+
         month_filter = request.args.get("month", datetime.datetime.now().strftime("%Y-%m"))
         
         pipeline = [
@@ -58,7 +63,11 @@ def dashboard():
     except Exception as e:
         log_error(str(e))
         flash(f"Error loading dashboard: {str(e)}", "danger")
-        return render_template("dashboard.html", income=0, expense=0, balance=0)
+        # FIX: Provide default values so the page does not crash
+        return render_template("dashboard.html", 
+                               income=0, expense=0, balance=0, 
+                               budget_limit=0, budget_pct=0, 
+                               chart_data=[], goals=[])
 
 @app.route("/transactions", methods=["GET", "POST"])
 def transactions():
@@ -91,8 +100,12 @@ def transactions():
     
     sort_by = request.args.get("sort", "date")
     
-    txs = list(db.transactions.find(query).sort(sort_by, -1))
-    categories = list(db.categories.find())
+    try:
+        txs = list(db.transactions.find(query).sort(sort_by, -1))
+        categories = list(db.categories.find())
+    except:
+        txs = []
+        categories = []
     
     return render_template("transactions.html", transactions=txs, categories=categories)
 
@@ -211,3 +224,4 @@ def restore_backup():
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
+@
