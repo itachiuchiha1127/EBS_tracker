@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-bs-theme="{{ config.theme }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBS Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/style.css") }}">
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="border-end" id="sidebar-wrapper">
+            <div class="sidebar-heading border-bottom">
+                <i class="fas fa-wallet me-2"></i> MyFinances
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="{{ url_for("dashboard") }}" class="list-group-item list-group-item-action p-3"><i class="fas fa-tachometer-alt me-3"></i> Dashboard</a>
+                <a href="{{ url_for("transactions") }}" class="list-group-item list-group-item-action p-3"><i class="fas fa-list me-3"></i> Transactions</a>
+                <a href="{{ url_for("manage_data") }}" class="list-group-item list-group-item-action p-3"><i class="fas fa-database me-3"></i> Manage Data</a>
+                <a href="{{ url_for("settings") }}" class="list-group-item list-group-item-action p-3"><i class="fas fa-cog me-3"></i> Settings</a>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper" class="w-100">
+            <nav class="navbar navbar-expand-lg border-bottom py-3">
+                <div class="container-fluid position-relative">
+                    <!-- Center: Animated Logo & Subtitle -->
+                    <div class="mx-auto text-center">
+                        <div class="logo-container">
+                            <span class="logo-text">EBS_tracker</span><span class="cursor">|</span>
+                        </div>
+                        <div class="logo-subtitle">Expense, Budget & Savings Tracker</div>
+                    </div>
+
+                    <!-- Right: Status (Absolute Position to stay right) -->
+                    <div class="position-absolute top-50 end-0 translate-middle-y me-4">
+                        <span class="fw-bold status-text d-none d-md-inline">Status: <span class="badge bg-success online-badge">Online</span></span>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid mt-4 main-content">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} shadow-sm fade show">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for("static", filename="js/script.js") }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
+@

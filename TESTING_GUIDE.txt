@@ -1,0 +1,43 @@
+﻿@
+EBS TRACKER - USER GUIDE & TESTING STEPS
+========================================
+
+1. INITIALIZE DATA (Do this first!)
+   - Open http://127.0.0.1:5000
+   - Go to "Manage Data" in the sidebar.
+   - Add Categories: Type "Food", "Salary", "Rent" and click Add.
+
+2. SETTINGS
+   - Go to "Settings".
+   - Change Theme to "Dark" and Currency to your symbol (e.g., € or ₹).
+   - Click Save to verify the UI changes.
+
+3. ADD TRANSACTIONS
+   - Go to "Transactions".
+   - Add Income: Type=Income, Category=Salary, Amount=5000, Notes=Paycheck.
+   - Add Expense: Type=Expense, Category=Food, Amount=150, Notes=Groceries.
+   - Verify: Green badge for Income, Red badge for Expense in the table.
+
+4. DASHBOARD & BUDGET
+   - Go to "Dashboard". Check Total Income/Expense/Balance.
+   - Go to "Manage Data" -> Set Monthly Budget (e.g., 1000 for current month).
+   - Return to "Dashboard": You should see a progress bar showing % spent.
+
+5. SAVINGS GOALS
+   - Go to "Manage Data" -> New Savings Goal.
+   - Create Goal: Name="Laptop", Target=2000, Current=500.
+   - Return to "Dashboard": Check Goal progress under the budget card.
+
+6. EXPORTS
+   - Dashboard -> Click "PDF Report" (downloads report_YYYY-MM.pdf).
+   - Transactions -> Click "Export CSV" (downloads transactions.csv).
+
+7. BACKUP & RESTORE
+   - Manage Data -> Click "Download Backup" (saves backup.json).
+   - Test: Go to Transactions and DELETE one item.
+   - Restore: Go to Manage Data -> Upload "backup.json" -> Click Restore.
+   - Verify: The deleted item should reappear in the Transactions list.
+
+8. LOGS
+   - Check the "logs/app.log" file in your folder to see system events/errors.
+@

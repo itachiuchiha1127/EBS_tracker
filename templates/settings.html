@@ -1,0 +1,24 @@
+﻿@
+{% extends "base.html" %}
+{% block content %}
+<h2>Settings</h2>
+<div class="card col-md-6">
+    <div class="card-body">
+        <form method="POST">
+            <div class="mb-3">
+                <label>Theme</label>
+                <select name="theme" class="form-select">
+                    <option value="light" {% if config.theme == "light" %}selected{% endif %}>Light</option>
+                    <option value="dark" {% if config.theme == "dark" %}selected{% endif %}>Dark</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>Currency Symbol</label>
+                <input type="text" name="currency" class="form-control" value="{{ config.currency_symbol }}">
+            </div>
+            <button class="btn btn-primary">Save Settings</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+@

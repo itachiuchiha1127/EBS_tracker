@@ -1,0 +1,202 @@
+﻿@
+/* --- GOOGLE FONTS --- */
+body {
+    font-family: "Poppins", sans-serif;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* --- THEME: WATERY (LIGHT) --- */
+:root {
+    --sidebar-width: 260px;
+    
+    --bg-body: #eef9fb; 
+    --bg-sidebar: linear-gradient(180deg, #00838f 0%, #006064 100%);
+    --text-sidebar: #ffffff;
+    --sidebar-hover: rgba(255, 255, 255, 0.15);
+    --card-bg: #ffffff;
+    --text-main: #2c3e50;
+    
+    /* Light Mode Glow Colors */
+    --logo-color: #00838f;
+    --logo-glow: rgba(0, 131, 143, 0.4);
+    
+    --card-shadow: 0 10px 20px rgba(0, 131, 143, 0.15), 0 6px 6px rgba(0, 131, 143, 0.10);
+    --card-hover-shadow: 0 15px 30px rgba(0, 131, 143, 0.25);
+    --navbar-bg: #ffffff;
+    --accent-color: #00acc1;
+}
+
+/* --- THEME: CHARCOAL (DARK) --- */
+[data-bs-theme="dark"] {
+    --bg-body: #121212;
+    --bg-sidebar: linear-gradient(180deg, #263238 0%, #1c2529 100%);
+    --text-sidebar: #cfd8dc;
+    --sidebar-hover: rgba(255, 255, 255, 0.05);
+    --card-bg: #1e1e1e;
+    --text-main: #eceff1;
+    
+    /* Dark Mode Glow Colors */
+    --logo-color: #4dd0e1;
+    --logo-glow: rgba(77, 208, 225, 0.6);
+    
+    --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 6px 6px rgba(0, 0, 0, 0.2);
+    --card-hover-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+    --navbar-bg: #1e1e1e;
+    --accent-color: #546e7a;
+}
+
+/* --- LAYOUT & BACKGROUNDS --- */
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+}
+
+#wrapper {
+    overflow-x: hidden;
+}
+
+/* --- SIDEBAR --- */
+#sidebar-wrapper {
+    min-height: 100vh;
+    width: var(--sidebar-width);
+    margin-left: 0;
+    background: var(--bg-sidebar);
+    border-right: none !important;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 1.5rem 1rem;
+    font-size: 1.2rem;
+    color: var(--text-sidebar);
+    text-align: center;
+    font-weight: 600;
+}
+
+.list-group-item {
+    background: transparent;
+    color: var(--text-sidebar);
+    border: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-left: 4px solid transparent;
+}
+
+.list-group-item:hover {
+    background: var(--sidebar-hover);
+    color: #fff;
+    border-left: 4px solid #4dd0e1;
+    padding-left: 25px !important;
+}
+
+/* --- NAVBAR --- */
+.navbar {
+    background-color: var(--navbar-bg) !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-bottom: none !important;
+    height: 100px; /* Height for logo + subtitle */
+}
+
+/* --- 3D CARDS --- */
+.card {
+    background-color: var(--card-bg);
+    border: none;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.card-header {
+    background-color: transparent;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+    font-weight: 600;
+    padding: 1rem 1.25rem;
+}
+
+/* --- ANIMATED GLOW LOGO --- */
+.logo-container {
+    display: inline-block;
+    font-family: "Fira Code", monospace;
+    font-weight: bold;
+    font-size: 2.5rem;
+    color: var(--logo-color); 
+    line-height: 1;
+    /* The Glowing Effect */
+    text-shadow: 0 0 15px var(--logo-glow);
+    margin-bottom: 5px;
+}
+
+.logo-subtitle {
+    font-family: "Poppins", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: var(--text-main);
+    opacity: 0.8;
+}
+
+.logo-text {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    animation: typeCycle 8s steps(11, end) infinite;
+}
+
+.cursor {
+    animation: blink 1s step-end infinite;
+    color: var(--accent-color);
+    font-weight: 100;
+    margin-left: 5px;
+    font-size: 2.5rem;
+}
+
+@keyframes typeCycle {
+    0% { width: 0; }
+    30% { width: 11ch; } 
+    60% { width: 11ch; }
+    80% { width: 0; }
+    100% { width: 0; }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* --- BUTTONS & INPUTS --- */
+.btn {
+    border-radius: 8px;
+}
+
+.btn-custom-primary {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+input.form-control, select.form-select {
+    background-color: var(--bg-body);
+    border: 1px solid rgba(128,128,128, 0.2);
+    border-radius: 8px;
+    color: var(--text-main);
+}
+
+/* Fix Chart colors in Dark Mode */
+[data-bs-theme="dark"] .card-title {
+    color: #fff;
+}
+
+/* Restrict Chart Height for smaller look */
+.chart-wrapper {
+    max-height: 220px;
+    display: flex;
+    justify-content: center;
+}
+@

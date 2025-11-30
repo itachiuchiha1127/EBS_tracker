@@ -1,0 +1,10 @@
+﻿@
+venv/
+__pycache__/
+*.pyc
+logs/
+exports/
+user_config.json
+.env
+.DS_Store
+@
